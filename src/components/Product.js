@@ -3,7 +3,7 @@ import { CartContext } from '../contexts/CartContext'
 
 const Product = props => {
 	const { cart, removeItem } = useContext(CartContext)
-
+	console.log(props.product)
 	let inCart = false
 
 	cart.forEach(item => {
@@ -23,7 +23,7 @@ const Product = props => {
 
 			{
 				inCart ?
-					<button onClick={() => removeItem(props.product)}>
+					<button style={{ background: 'lightcoral', color: 'white' }} onClick={() => removeItem(props.product)}>
 						In Cart
 					</button>
 					:
