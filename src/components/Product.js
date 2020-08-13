@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CartContext } from '../contexts/CartContext'
 
 const Product = props => {
+	const { cart, removeItem } = useContext(CartContext)
+	console.log(props.product)
+	let inCart = false
+
+	cart.forEach(item => {
+		if (item.id === props.product.id) {
+			inCart = true
+		}
+	})
+
 	return (
 		<div className="product">
 			<img src={props.product.image} alt={`${props.product.title} book`} />
@@ -9,9 +20,17 @@ const Product = props => {
 
 			<p className="price">${props.product.price}</p>
 
-			<button onClick={() => props.addItem(props.product)}>
-				Add to cart
-			</button>
+
+			{
+				inCart ?
+					<button style={{ background: 'lightcoral', color: 'white' }} onClick={() => removeItem(props.product)}>
+						In Cart
+					</button>
+					:
+					<button onClick={() => props.addItem(props.product)}>
+						Add to Cart
+					</button>
+			}
 		</div>
 	);
 };
