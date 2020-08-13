@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext'
 
 const Product = props => {
-	const { cart } = useContext(CartContext)
+	const { cart, removeItem } = useContext(CartContext)
 
 	let inCart = false
 
@@ -20,9 +20,17 @@ const Product = props => {
 
 			<p className="price">${props.product.price}</p>
 
-			<button style={{ background: inCart ? 'lightcoral' : null, color: inCart ? 'white' : null }} disabled={inCart} onClick={() => props.addItem(props.product)}>
-				{inCart ? 'In cart' : 'Add to cart'}
-			</button>
+
+			{
+				inCart ?
+					<button onClick={() => removeItem(props.product)}>
+						In Cart
+					</button>
+					:
+					<button onClick={() => props.addItem(props.product)}>
+						Add to Cart
+					</button>
+			}
 		</div>
 	);
 };
